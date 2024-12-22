@@ -71,4 +71,5 @@ void CloseConnection()
 }
 
 
-#endif CONNECTOR_H
+#endif
+

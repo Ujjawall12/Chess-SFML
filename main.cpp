@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <time.h>
 #include "Connector.hpp"
+#include "StockfishConnector.hpp"
 using namespace sf;
 
 int size = 56;
@@ -76,8 +77,8 @@ int main()
 {
     RenderWindow window(VideoMode(504, 504), "The Chess! (press SPACE)");
 
-    ConnectToEngine("stockfish.exe");    
-
+       // ConnectToEngine("stockfish.exe");
+    ConnectToEngine(const_cast<char*>("stockfish.exe"));
     Texture t1,t2;
     t1.loadFromFile("images/figures.png"); 
     t2.loadFromFile("images/board.png");
@@ -110,7 +111,7 @@ int main()
 
             /////drag and drop///////
             if (e.type == Event::MouseButtonPressed)
-                if (e.key.code == Mouse::Left)
+                if (e.mouseButton.button == Mouse::Left)
                   for(int i=0;i<32;i++)
                   if (f[i].getGlobalBounds().contains(pos.x,pos.y))
                       {
@@ -121,7 +122,7 @@ int main()
                       }
 
              if (e.type == Event::MouseButtonReleased)
-                if (e.key.code == Mouse::Left)
+                if (e.mouseButton.button == Mouse::Left)
                  {
                   isMove=false;
                   Vector2f p = f[n].getPosition() + Vector2f(size/2,size/2);
